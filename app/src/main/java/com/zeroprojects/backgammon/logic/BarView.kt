@@ -11,7 +11,7 @@ import android.graphics.*
 class BarView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
 
     private val rectPaint = Paint().apply {
-        color = Color.BLUE
+        color = Color.TRANSPARENT
         style = Paint.Style.FILL
     }
 
@@ -25,16 +25,13 @@ class BarView(context: Context, attrs: AttributeSet? = null) : View(context, att
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        val rectWidth = width.toFloat() * 0.8f // Width of the rectangle (80% of the view width)
-        val rectHeight = height.toFloat() * 0.5f // Height of the rectangle (50% of the view height)
-        val rectLeft = (width - rectWidth) / 2 // Left position of the rectangle
+        val rectWidth = width.toFloat() // Width of the rectangle
+        val rectHeight = height.toFloat() // Height of the rectangle
+        val rectLeft = 0f // Left position of the rectangle
         val rectTop = (height - rectHeight) / 2 // Top position of the rectangle
         val rectRight = rectLeft + rectWidth // Right position of the rectangle
         val rectBottom = rectTop + rectHeight // Bottom position of the rectangle
 
-        // Update rectPaint color and style if needed
-        rectPaint.color = Color.BLACK
-        rectPaint.style = Paint.Style.FILL
 
         // Draw the transparent rectangle
         canvas.drawRect(rectLeft, rectTop, rectRight, rectBottom, rectPaint)
@@ -45,9 +42,9 @@ class BarView(context: Context, attrs: AttributeSet? = null) : View(context, att
 
         // Update path for the triangle
         path.reset()
-        path.moveTo(rectLeft + rectWidth / 2, rectTop) // Bottom center of the rectangle
-        path.lineTo(rectLeft, rectBottom) // Top left corner of the rectangle
-        path.lineTo(rectRight, rectBottom) // Top right corner of the rectangle
+        path.moveTo(rectRight - rectWidth / 2, rectTop + rectHeight / 2) // Right center of the rectangle
+        path.lineTo(rectLeft, rectTop) // Top left corner of the rectangle
+        path.lineTo(rectLeft, rectBottom) // Bottom left corner of the rectangle
         path.close() // Close the path to form a triangle
 
         // Draw the triangle

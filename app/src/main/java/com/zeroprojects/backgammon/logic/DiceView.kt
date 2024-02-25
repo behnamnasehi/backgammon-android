@@ -37,7 +37,7 @@ class DiceView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     fun setDiceSize(size:Float){
         this.diceSize = size
-        this.dotOffset = size / 5
+        this.dotOffset = size / 4
     }
 
     fun getNumber():Int{
